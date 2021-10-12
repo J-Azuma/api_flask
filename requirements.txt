@@ -6,3 +6,5 @@ Flask-Cors
 marshmallow
 marshmallow-sqlalchemy 
 flask-marshmallow
+mysql-connector-python
+PyMySQL
