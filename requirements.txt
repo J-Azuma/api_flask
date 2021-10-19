@@ -8,3 +8,5 @@ marshmallow-sqlalchemy
 flask-marshmallow
 mysql-connector-python
 PyMySQL
+cryptography
+flask_testing
