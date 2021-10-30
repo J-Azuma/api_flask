@@ -4,8 +4,7 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   uid INTEGER PRIMARY KEY AUTO_INCREMENT,
-  username TEXT NOT NULL,
-  password TEXT NOT NULL
+  username TEXT NOT NULL
 );
 
 CREATE TABLE posts (
