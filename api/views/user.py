@@ -4,7 +4,7 @@ import json
 
 user_route = Blueprint('user_route' , __name__)
 
-@user_route.route('/user/list', methods=['GET'])
+@user_route.route('/users/list', methods=['GET'])
 def getUsers():
     
     users: list = User.getUserList()
