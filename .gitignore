@@ -1,3 +1,4 @@
 instance/
 __pychahe__/
 *.pyc
+.pytest_cache
