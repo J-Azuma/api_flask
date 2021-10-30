@@ -1,8 +1,10 @@
 DEBUG = True
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{db-name}?charset=utf8'.format(**{
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
       'user': 'azuma',
-      'password': 'Azuma516',
+      'password': 'Azuma_516',
       'host': 'localhost',
-      'db-name': 'api'
+      'db_name': 'api'
   })
+
