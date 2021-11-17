@@ -1,8 +1,9 @@
 ## アプリケーションファクトリを定義
 from flask import (Flask)
 from api.database import db, init_db, marshmallow
-from api.views import hello
-from api.views import user
+from api.mail import init_mail
+from api.views import user,hello
+from flask_mail import Mail
 
 def create_app():
     app = Flask(__name__ , instance_relative_config=True)
@@ -14,10 +15,10 @@ def create_app():
     app.config.from_envvar("APP_CONFIG")
 
     init_db(app)
-
+    init_mail(app)
     # ルーティング設定読み込み
     app.register_blueprint(hello.bp)
-    app.register_blueprint(user.user_route, url_prefix='/api')
+    app.register_blueprint(user.user_route, url_prefix='/api/v1/users/')
     return app
 
     
