@@ -1,6 +1,6 @@
 from flask import request, jsonify
 def test_getUserList(client):
-    response = client.get('/api/users/list')
+    response = client.get('/api/vi/users/list')
     assert response.status_code == 200
 
     res_json = response.get_json()

@@ -11,3 +11,8 @@ PyMySQL
 cryptography
 flask_testing
 flask-migrate
+Flask-JWT
+flask-bcrypt
+Bcrypt-Flask
+Werkzeug
+Flask-Mail

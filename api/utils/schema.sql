@@ -4,7 +4,10 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   uid INTEGER PRIMARY KEY AUTO_INCREMENT,
-  username TEXT NOT NULL
+  username TEXT NOT NULL,
+  email TEXT NOT NULL,
+  password TEXT,
+  is_verified BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE posts (
