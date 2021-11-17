@@ -34,6 +34,7 @@ class User(db.Model):
         db.session.add(user)
         db.session.commit()
         
+        
     def verifyUser(aUid: int):
         # ユーザIDに合致するレコードのis_verifyカラムをTrueにupdateする
         db.session.query(User).filter(User.uid == aUid).update({"is_verified" : 1})
