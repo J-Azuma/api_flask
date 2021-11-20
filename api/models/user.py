@@ -5,7 +5,8 @@ class User(db.Model):
     __tablename__ = 'users'
     __table_args__ = {'extend_existing': True}
 
-    uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    # Flask=JWTはidという文字列でないと動作しないため
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), nullable=False, default="")
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String , nullable=True)
@@ -35,13 +36,13 @@ class User(db.Model):
         db.session.commit()
         
         
-    def verifyUser(aUid: int):
+    def verifyUser(aId: int):
         # ユーザIDに合致するレコードのis_verifyカラムをTrueにupdateする
-        db.session.query(User).filter(User.uid == aUid).update({"is_verified" : 1})
+        db.session.query(User).filter(User.id == aId).update({"is_verified" : 1})
         db.session.commit()
         
 class UserSchema(marshmallow.SQLAlchemyAutoSchema):
     class Meta:
         model = User
-        fields = ('uid' , 'username', 'email', 'password' , 'is_verified')
+        fields = ('id' , 'username', 'email', 'password' , 'is_verified')
         

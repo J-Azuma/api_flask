@@ -12,6 +12,6 @@ def authenticate(email :str, password :str):
 
 def identity(payload :object):
     print(payload)
-    uid = payload['identity']
-    return db.session.query(User.uid).filter_by(uid = uid)
+    uId = payload['identity']
+    return db.session.query(User.id).filter_by(id = uId)
 
