@@ -34,7 +34,7 @@ def createUser():
 
 @user_route.route('verify', methods=['PATCH'])
 def verifyUser():
-    uid :int = request.args.get('uid')
+    uid :int = request.args.get('id')
     User.verifyUser(uid)
     
     return make_response(jsonify({

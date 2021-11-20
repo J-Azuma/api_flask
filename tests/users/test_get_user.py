@@ -5,5 +5,5 @@ def test_getUserList(client):
 
     res_json = response.get_json()
     assert res_json['code'] == 200
-    assert res_json['users'][0]['uid'] == 1
+    assert res_json['users'][0]['id'] == 1
     assert res_json['users'][0]['username'] == 'user1'
