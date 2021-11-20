@@ -2,6 +2,7 @@
 from flask import (Flask)
 from api.database import db, init_db, marshmallow
 from api.mail import init_mail
+from api.set_jwt import init_jwt
 from api.views import user,hello
 from flask_mail import Mail
 
@@ -16,6 +17,7 @@ def create_app():
 
     init_db(app)
     init_mail(app)
+    init_jwt(app)
     # ルーティング設定読み込み
     app.register_blueprint(hello.bp)
     app.register_blueprint(user.user_route, url_prefix='/api/v1/users/')
