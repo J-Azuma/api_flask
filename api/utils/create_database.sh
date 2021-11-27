@@ -1,7 +1,7 @@
 #!/bin/bash
 ###
-# データベースとテーブルを作成します
+# テスト用のデータベースとテーブルを作成します
 ###
 service mysql start
-mysql -u root < /usr/local/api_flask/api/utils/create_database.sql
-mysql -u root api < /usr/local/api_flask/api/utils/schema.sql
+mysql --defaults-extra-file=/etc/mysql/my.cnf -u root  < /usr/local/api_flask/api/utils/create_database.sql
+mysql --defaults-extra-file=/etc/mysql/my.cnf -u root  api < /usr/local/api_flask/api/utils/schema.sql
