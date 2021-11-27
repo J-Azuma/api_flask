@@ -19,4 +19,4 @@ CREATE TABLE posts (
   FOREIGN KEY (author_id) REFERENCES users (id)
 );
 
-insert into users values(username, email, password, is_verified) ('user1' , 'user1@example.com' , 'pbkdf2:sha256:260000$br82oxeDep1o4Svb$03094151072d28b757194a884921d13e7bbffc6794c217bd3fe5538f3e08d814' , 0);
+insert into users (username, email, password) values('user1' , 'user1@example.com' , 'pbkdf2:sha256:260000$br82oxeDep1o4Svb$03094151072d28b757194a884921d13e7bbffc6794c217bd3fe5538f3e08d814');

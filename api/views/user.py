@@ -5,7 +5,7 @@ from api.services.user_service import ProRegistUser
 
 user_route = Blueprint('user_route' , __name__)
 
-@user_route.route('list', methods=['GET'])
+@user_route.route('', methods=['GET'])
 def getUsers():
     
     users: list = User.getUserList()
