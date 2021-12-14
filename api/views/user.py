@@ -5,7 +5,7 @@ from api.services.user_service import ProRegistUser
 
 user_route = Blueprint('user_route' , __name__)
 
-@user_route.route('list', methods=['GET'])
+@user_route.route('', methods=['GET'])
 def getUsers():
     
     users: list = User.getUserList()
@@ -17,20 +17,20 @@ def getUsers():
     }), 200)
 
 
-@user_route.route('create', methods=['POST'])
+@user_route.route('', methods=['POST'])
 def createUser():
-
+    user_schema: UserSchema = UserSchema()
     # json形式でパラメータを受け取る
     userData :dict = {
       "email" : request.json['email'] , 
       "password": generate_password_hash(request.json["password"])
     }
-    ProRegistUser(userData)
+    user : User = ProRegistUser(userData)
     # レスポンスを返す
     return make_response(jsonify({
       'code': 200,
-      'msg': 'メールを送信しました。'
-    }), 200)
+      'user' : user_schema.dump(user)
+    }), 201)
 
 @user_route.route('verify', methods=['PATCH'])
 def verifyUser():

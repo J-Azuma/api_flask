@@ -34,6 +34,7 @@ class User(db.Model):
         user = User(email=aUserData['email'] , password=aUserData['password'])
         db.session.add(user)
         db.session.commit()
+        return user
         
         
     def verifyUser(aId: int):
