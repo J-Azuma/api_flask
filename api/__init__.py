@@ -1,9 +1,9 @@
 ## アプリケーションファクトリを定義
 from flask import (Flask)
-from api.database import db, init_db, marshmallow
+from api.database import db, init_db
 from api.mail import init_mail
-from api.views import user,hello
-from flask_mail import Mail
+from api.views.hello import Hello
+from api.views.userView import UserView
 from flask_jwt import JWT
 from api.views.auth import authenticate, identity
 
@@ -22,8 +22,8 @@ def create_app():
     jwt = JWT(app, authenticate, identity)
     
     # ルーティング設定読み込み
-    app.register_blueprint(hello.bp)
-    app.register_blueprint(user.user_route, url_prefix='/api/v1/users/')
+    app.register_blueprint(Hello.bp)
+    app.register_blueprint(UserView.user_route, url_prefix='/api/v1/users/')
     return app
 
     
