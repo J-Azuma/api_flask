@@ -1,7 +1,7 @@
 from flask import Blueprint, request, make_response, jsonify
 from api.models.user import User, UserSchema
 from werkzeug.security import generate_password_hash
-from api.services.user_service import ProRegistUser
+from api.services.user.registUserService import registUserService
 
 class UserView(object):
         
@@ -12,7 +12,7 @@ class UserView(object):
         
         users: list = User.getUserList()
         user_schema: UserSchema = UserSchema(many=True)
-
+        
         return make_response(jsonify({
           'code': 200,
           'users': user_schema.dump(users)
@@ -27,7 +27,8 @@ class UserView(object):
           "email" : request.json['email'] , 
           "password": generate_password_hash(request.json["password"])
         }
-        user : User = ProRegistUser(userData)
+        user : User = registUserService.ProRegistUser(userData)
+        
         # レスポンスを返す
         return make_response(jsonify({
           'code': 200,
