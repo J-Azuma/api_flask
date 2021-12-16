@@ -27,7 +27,8 @@ class UserView(object):
           "email" : request.json['email'] , 
           "password": generate_password_hash(request.json["password"])
         }
-        user : User = registUserService.ProRegistUser(userData)
+        
+        user : User = User.registUser(userData)
         
         # レスポンスを返す
         return make_response(jsonify({

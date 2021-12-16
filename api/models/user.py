@@ -23,7 +23,8 @@ class User(db.Model):
 
   
     def getUserList():
-        user_list: list = db.session.query(User).all()
+        from api.repositories.userRepository import userRepository
+        user_list: list = userRepository.getUsers()
 
         if user_list == None:
             return []
@@ -32,8 +33,8 @@ class User(db.Model):
           
     def registUser(aUserData :dict):
         user = User(email=aUserData['email'] , password=aUserData['password'])
-        db.session.add(user)
-        db.session.commit()
+        from api.repositories.userRepository import userRepository
+        userRepository.insertUser(user)
         return user
         
         
