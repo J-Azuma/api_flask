@@ -23,7 +23,8 @@ class User(db.Model):
 
   
     def getUserList():
-        user_list: list = db.session.query(User).all()
+        from api.repositories.userRepository import userRepository
+        user_list: list = userRepository.getUsers()
 
         if user_list == None:
             return []
