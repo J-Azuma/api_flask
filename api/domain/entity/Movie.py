@@ -1,9 +1,10 @@
 from datetime import datetime, time
+from typing import List
 
 class Movie():
     
         
-    def __init__(self, id: int, title: str, poster_path: str, release_date: datetime, runtime: time, overview: str) -> None:
+    def __init__(self, id: int, title: str, poster_path: str, release_date: datetime, runtime: time, overview: str, genres: List[int]) -> None:
         """initiarize Movie class object
 
         Args:
@@ -20,4 +21,4 @@ class Movie():
         self.release_date: datetime  = release_date
         self.runtime: time = runtime
         self.overview: str = overview
-        
+        self.genres: List[int] = genres
