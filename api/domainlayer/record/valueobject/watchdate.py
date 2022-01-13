@@ -4,11 +4,11 @@ from datetime import date, datetime
 @dataclass(frozen=True)
 class watchDate():
     
-    value: date
+    value: datetime
     
-    def __init__(self, value: date) -> None:
+    def __init__(self, value: datetime) -> None:
         
-        if not isinstance(value, date):
+        if not isinstance(value, datetime):
             raise TypeError("日付を入力してください")
         
         if self.is_future_date(value):
@@ -19,6 +19,6 @@ class watchDate():
     
     
     @classmethod
-    def is_future_date(cls, value: date) -> bool:
-        today  = date.today()
+    def is_future_date(cls, value: datetime) -> bool:
+        today  = datetime.today()
         return today < value
