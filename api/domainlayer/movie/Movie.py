@@ -14,6 +14,7 @@ class Movie():
             release_date (datetime): release date(format: yyyy/mm/dd)
             runtime (time): runtime(format: HH:MM:SS)
             overview (str): overview
+            genres (List[int]): genres of movie
         """        
         self.id: int = id
         self.title: str = title
