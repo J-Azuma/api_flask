@@ -1,8 +1,8 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABC, ABCMeta, abstractmethod
 
 from api.domainlayer.movie.Movie import Movie
 
-class ImovieReposirtory(metaclass=ABCMeta):
+class ImovieRepository(ABC):
     """movieオブジェクトを操作するrepositoryの抽象クラス
 
     Args:
@@ -10,7 +10,7 @@ class ImovieReposirtory(metaclass=ABCMeta):
     """    
     
     @abstractmethod
-    def findby_id(self, id: int):
+    def find_by_id(self, id: int) -> Movie:
         """idでmovieオブジェクトを検索
 
         Args:
@@ -19,7 +19,7 @@ class ImovieReposirtory(metaclass=ABCMeta):
         pass
     
     @abstractmethod
-    def findby_name(self, name: str):
+    def findby_name(self, name: str) -> Movie:
         """タイトルで映画を検索
 
         Args:
