@@ -1,7 +1,6 @@
 from flask import Blueprint, request, make_response, jsonify
 from api.models.user import User, UserSchema
 from werkzeug.security import generate_password_hash
-from api.services.user.registUserService import registUserService
 
 class UserView(object):
         
