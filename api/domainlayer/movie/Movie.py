@@ -4,7 +4,7 @@ from typing import List
 class Movie():
     
         
-    def __init__(self, id: int, title: str, poster_path: str, release_date: date, runtime: int, overview: str, genres: List[int]) -> None:
+    def __init__(self, id: int, title: str, poster_path: str, release_date: date, runtime: int, overview: str, genres: List) -> None:
         """initiarize Movie class object
 
         Args:
