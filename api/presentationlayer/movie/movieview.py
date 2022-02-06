@@ -9,6 +9,7 @@ from api.domainlayer.movie.Imovierepository import ImovieRepository
 from api.infrastructurelayer.movie.movierepository import MovieRepository
 # プレゼンテーション層がドメイン層とインフラ層に依存している。何とかしたい
 from api.presentationlayer.movie.validation.schema import get_by_id_schema
+from api.presentationlayer.shared.exception.exceptionhandler import BadRequestException
 from api.presentationlayer.shared.validation.japaneseerrorhandler import  JapaneseErrorHandler
 from api.usecaselayer.movies.moviedetail import MovieDetail
 from api.usecaselayer.movies.moviedata import MovieData
@@ -39,8 +40,8 @@ class MovieView(object):
         v = Validator(get_by_id_schema, error_handler = JapaneseErrorHandler)
         if not v.validate({'id' : id}):
             return jsonify({'result' : 'failure' , 'id' : id, 'errors' : v.errors}), 400
-        
-        
+
+
         movierepository: ImovieRepository = MovieRepository()
         
         findmoviebyid: MovieDetail = MovieDetail(movierepository)
