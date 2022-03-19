@@ -22,24 +22,21 @@ class NotFoundException(Exception):
 
 class BadRequestException(Exception):
 
-    def __init__(self, message: str):
-        self.message = message
+    def __init__(self, value: str):
+        self.value = value
         
     @staticmethod
     def error_response(e):
         return jsonify({
-            'code' : BAD_REQUEST, 'message' : e.message
+            'code' : BAD_REQUEST, 'message' : e.value
             }), BAD_REQUEST
 
 
 class InternalServerException(Exception):
 
-    def __init__(self, message: str = "予期しないエラーが発生しました。"):
-        self.message = message
-
     @staticmethod
     def error_response(e):
         return jsonify({
             'code' : INTERNAL_SERVER_ERROR,
-            'message' : "時間をおいてからお試しください"
+            'message' : "エラーが発生しました"
         }), INTERNAL_SERVER_ERROR

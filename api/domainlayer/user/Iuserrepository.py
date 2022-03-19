@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractclassmethod, abstractmethod
 
 from api.domainlayer.user.user import User
 
-class IuserRepository(metalass=ABCMeta):
+class IuserRepository(metaclass=ABCMeta):
     
     @abstractmethod
     def add(self, user: User) -> None:
