@@ -67,4 +67,16 @@ def test_ユーザ重複時に例外を送出(mocker):
         validate_user.validate(user)
     
     assert str(e.value) == "メールアドレスが重複しています"
-     
+
+def test_ユーザのメールアドレスが重複しない場合何もしない(mocker):
+    # 事前条件： なし
+    
+    # 操作： validateメソッドを呼び出し
+    user = createuser()
+    dependency = Dependency()
+    validate_user: ValidateUser = dependency.resolve(ValidateUser)
+    
+    mocker.patch.object(validate_user, 'exists' , return_value=False)
+    validate_user.validate(user)
+    
+    assert True

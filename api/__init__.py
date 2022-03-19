@@ -34,9 +34,11 @@ def create_app():
     app.register_blueprint(MovieView.movie_route, url_prefix="/api/v1/movies/")
     
     # ExceptionHanlder
-    app.register_error_handler(ValueError, BadRequestException.error_response)
+    app.register_error_handler(BAD_REQUEST, BadRequestException.error_response)
     app.register_error_handler(NOT_FOUND, NotFoundException.error_response)
     app.register_error_handler(INTERNAL_SERVER_ERROR, InternalServerException.error_response)
+    
+    # ExceptionHandler in Domain layer
     app.register_error_handler(BadRequestDomainException, BadRequestDomainException.handle_domain_exception)
     return app
 
