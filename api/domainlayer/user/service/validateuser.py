@@ -1,5 +1,6 @@
 from typing import Union
 from injector import inject
+from api.domainlayer.shared.domainexception import BadRequestDomainException
 from api.domainlayer.user.Iuserrepository import IuserRepository
 from api.domainlayer.user.user import User
 
@@ -28,3 +29,7 @@ class ValidateUser():
         """        
         userrecord: Union[User, None] = self.userrepository.find_by_email(user)
         return userrecord is not None
+    
+    def validate(self, user: User):
+        if self.exists(user):
+            raise BadRequestDomainException("メールアドレスが重複しています")

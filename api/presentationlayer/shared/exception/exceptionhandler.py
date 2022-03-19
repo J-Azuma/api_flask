@@ -28,7 +28,8 @@ class BadRequestException(Exception):
     @staticmethod
     def error_response(e):
         return jsonify({
-            'code' : BAD_REQUEST, 'message' : e.value
+            'code' : BAD_REQUEST, 
+            'message' : e.value
             }), BAD_REQUEST
 
 

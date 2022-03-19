@@ -1,5 +1,6 @@
 ## アプリケーションファクトリを定義
 from http.client import BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND
+import imp
 from flask import (Flask, jsonify)
 from api.database import db, init_db
 from api.mail import init_mail
@@ -7,8 +8,11 @@ from api.presentationlayer.movie.movieview import MovieView
 from api.presentationlayer.user.userview import UserView
 from api.presentationlayer.shared.exception.exceptionhandler import BadRequestException, InternalServerException, NotFoundException
 
+from api.domainlayer.shared.domainexception import BadRequestDomainException
 # from api.views.userView import UserView
 from flask_jwt import JWT
+
+
 # from api.views.auth import authenticate, identity
 
 def create_app():
@@ -30,10 +34,10 @@ def create_app():
     app.register_blueprint(MovieView.movie_route, url_prefix="/api/v1/movies/")
     
     # ExceptionHanlder
-    app.register_error_handler(BAD_REQUEST, BadRequestException.error_response)
+    app.register_error_handler(ValueError, BadRequestException.error_response)
     app.register_error_handler(NOT_FOUND, NotFoundException.error_response)
     app.register_error_handler(INTERNAL_SERVER_ERROR, InternalServerException.error_response)
-    
+    app.register_error_handler(BadRequestDomainException, BadRequestDomainException.handle_domain_exception)
     return app
 
     

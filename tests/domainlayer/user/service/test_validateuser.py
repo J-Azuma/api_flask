@@ -1,5 +1,8 @@
 from unittest import mock
 
+import pytest
+from api.domainlayer.shared.domainexception import BadRequestDomainException
+
 from api.domainlayer.user.service.validateuser import ValidateUser
 from api.config.dependency import Dependency
 from api.domainlayer.user.Iuserrepository import IuserRepository
@@ -50,4 +53,18 @@ def test_exists関数_ユーザが重複しない(mocker):
     
     # 重複がないことを検証
     assert exists_user == False
+
+def test_ユーザ重複時に例外を送出(mocker):
+    # 事前条件： なし
     
+    # 操作： validateメソッドを呼び出し
+    user = createuser()
+    dependency = Dependency()
+    validate_user: ValidateUser = dependency.resolve(ValidateUser)
+    
+    mocker.patch.object(validate_user, 'exists' , return_value=True)
+    with pytest.raises(BadRequestDomainException) as e:
+        validate_user.validate(user)
+    
+    assert str(e.value) == "メールアドレスが重複しています"
+     
