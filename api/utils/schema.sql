@@ -10,5 +10,5 @@ CREATE TABLE users (
 
 CREATE TABLE passwords (
    user_id VARCHAR(30) , INDEX password_index(user_id), FOREIGN KEY fk_userid(user_id) REFERENCES users(id) ON DELETE CASCADE,
-   value VARCHAR(50) NOT NULL unique
+   value VARCHAR(200) NOT NULL unique
 );

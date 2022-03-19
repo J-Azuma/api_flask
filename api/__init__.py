@@ -1,15 +1,15 @@
 ## アプリケーションファクトリを定義
 from http.client import BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND
-from xmlrpc.client import INTERNAL_ERROR
 from flask import (Flask, jsonify)
 from api.database import db, init_db
 from api.mail import init_mail
 from api.presentationlayer.movie.movieview import MovieView
+from api.presentationlayer.user.userview import UserView
 from api.presentationlayer.shared.exception.exceptionhandler import BadRequestException, InternalServerException, NotFoundException
-from api.views.hello import Hello
-from api.views.userView import UserView
+
+# from api.views.userView import UserView
 from flask_jwt import JWT
-from api.views.auth import authenticate, identity
+# from api.views.auth import authenticate, identity
 
 def create_app():
     app = Flask(__name__ , instance_relative_config=True)
@@ -23,10 +23,9 @@ def create_app():
     # 各種オブジェクトを初期化
     init_db(app)
     init_mail(app)
-    jwt = JWT(app, authenticate, identity)
+    # jwt = JWT(app, authenticate, identity)
     
     # ルーティング設定読み込み
-    app.register_blueprint(Hello.bp)
     app.register_blueprint(UserView.user_route, url_prefix='/api/v1/users/')
     app.register_blueprint(MovieView.movie_route, url_prefix="/api/v1/movies/")
     

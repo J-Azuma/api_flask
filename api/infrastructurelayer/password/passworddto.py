@@ -1,5 +1,3 @@
-from ast import Pass
-from tkinter import CASCADE
 from typing import Union
 from sqlalchemy import Column, ForeignKey, ForeignKeyConstraint
 from api.database import db
@@ -10,7 +8,7 @@ class PasswordDto(db.Model):
     __tablename__ = 'passwords'
     __table__args__ = {'extend_existing': True}
     
-    user_id = db.Column(db.String, ForeignKey('user.id' , ondelete=CASCADE), primary_key=True, unique=True)
+    user_id = db.Column(db.String, ForeignKey('users.id' , ondelete="CASCADE"), primary_key=True, unique=True)
     value  = db.Column(db.String, primary_key=True, unique=True)
     
     def to_entity(self) -> Password:
