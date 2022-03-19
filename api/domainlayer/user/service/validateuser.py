@@ -31,5 +31,13 @@ class ValidateUser():
         return userrecord is not None
     
     def validate(self, user: User):
+        """メールアドレス重複時に例外送出
+
+        Args:
+            user (User): ユーザエンティティ
+
+        Raises:
+            BadRequestDomainException: 入力値を原因とする例外
+        """
         if self.exists(user):
             raise BadRequestDomainException("メールアドレスが重複しています")
