@@ -26,12 +26,10 @@ class UserView():
         if not v.validate({'email': param['email'], 'password' : param['password']}):
             return jsonify({'result' : 'failure', 'errors' : v.errors}), 400
         
-        try:
-            dependency: Dependency = Dependency()
-            create_user: CreateUser = dependency.resolve(CreateUser)
-            create_user.register(param)
-        except Exception as e:
-            raise Exception("ユーザ作成処理に失敗しました")
+    
+        dependency: Dependency = Dependency()
+        create_user: CreateUser = dependency.resolve(CreateUser)
+        create_user.register(param)
         
         return jsonify({
             'code' : 200,

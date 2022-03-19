@@ -37,8 +37,7 @@ class CreateUser():
         user: User = User(email)
         password: Password = Password(user.id, param["password"])
         
-        if self.validateuser.exists(user):
-            raise ValueError("そのメールアドレスは既に存在します。")
+        self.validateuser.validate(user)
         
         # トランザクション処理にします
         self.userrepository.add(user)
