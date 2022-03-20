@@ -4,3 +4,4 @@ __pychahe__/
 .pytest_cache
 設計ドキュメント/
 rests/
+.env
