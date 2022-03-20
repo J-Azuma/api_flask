@@ -1,12 +1,10 @@
-from sqlalchemy import false
 from ulid import ULID
-
 from api.domainlayer.user.valueobject.email import Email
 
 class User():
     """Userクラス
     """    
-    def __init__(self, email: Email, is_verified: bool = False) -> None:
+    def __init__(self, id: str, email: Email, is_verified: bool = False) -> None:
         """Userインスタンスを初期化。
 
         Args:
@@ -14,11 +12,11 @@ class User():
             is_verified (bool, optional): 有効化フラグ Defaults to False.
             id (str, optional): id Defaults to str(ULID()).
         """        
-        self.__id: str = str(ULID())
+        print(id)
+        self.__id: str = id
         self.__email: Email = email
         self.__is_verified: bool = is_verified
         
-    
     @property
     def id(self) -> str:
         """idを返す

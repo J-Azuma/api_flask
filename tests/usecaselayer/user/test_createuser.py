@@ -1,17 +1,11 @@
-from ast import Pass
-from socket import create_server
 from unittest import mock
-from click import BadParameter
 import pytest
 from api.config.dependency import Dependency
 from api.domainlayer.user.service.validateuser import ValidateUser
-from api.domainlayer.user.user import User
-from api.domainlayer.password.password import Password
-from api.domainlayer.user.valueobject.email import Email
 from api.infrastructurelayer.password.passwordrepository import PasswordRepository
 from api.infrastructurelayer.user.userrepository import UserRepository
-from tests.common.factory import createpassword, createuser
 from api.usecaselayer.user.createuser import CreateUser
+from api.domainlayer.shared.domainexception import BadRequestDomainException
 
 def test_DIコンテナでCreateUserインスタンス作成():
     # 事前条件： なし
@@ -44,10 +38,10 @@ def test_メールアドレスとパスワードをリポジトリに渡す_異�
         'email' : 'hoge@exmaple.com',
         'password' : 'hoge_25252525'
     }
-    with pytest.raises(ValueError) as e:
+    with pytest.raises(BadRequestDomainException) as e:
         createuser.register(param)
     
-    assert str(e.value) == "そのメールアドレスは既に存在します。"
+    assert str(e.value) == "メールアドレスが重複しています"
         
 def test_メールアドレスとパスワードをリポジトリに渡す_正常系(mocker):
     # 事前準備

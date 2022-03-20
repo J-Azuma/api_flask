@@ -1,6 +1,5 @@
 from typing import Union
-from sqlalchemy import Column
-from api.database import db
+from sqlalchemy import Column, String, Boolean
 from api.domainlayer.user.user import User
 from api.domainlayer.user.valueobject.email import Email
 from api.infrastructurelayer.database import Base
@@ -16,9 +15,9 @@ class UserDto(Base):
     __table_args__ = {'extend_existing': True}
 
     # Flask=JWTはidという文字列でないと動作しないため
-    id = db.Column(db.String, primary_key=True, unique=True)
-    email  = db.Column(db.String, nullable=False, unique=True)
-    is_verified = db.Column(db.Boolean , nullable=False, default=False)
+    id = Column(String, primary_key=True, unique=True)
+    email  = Column(String, nullable=False, unique=True)
+    is_verified = Column(Boolean , nullable=False, default=False)
     
     
     def to_entity(self) -> User:
@@ -28,9 +27,9 @@ class UserDto(Base):
             User: Userクラスインスタンス
         """        
         return User(
+            self.id,
             Email(self.email),
-            self.is_verified,
-            self.id
+            self.is_verified
         )
         
     @staticmethod

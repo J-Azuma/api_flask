@@ -1,7 +1,6 @@
 from tokenize import String
 from typing import Union
 from sqlalchemy import Column, ForeignKey, ForeignKeyConstraint, String
-from api.database import db
 from api.domainlayer.password.password import Password
 from api.infrastructurelayer.database import Base
 

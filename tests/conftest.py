@@ -1,7 +1,7 @@
 from logging import debug
 import pytest
 from api  import create_app
-from api.database import init_db
+from api.infrastructurelayer.database import init_db
 import api
 
 @pytest.fixture
@@ -10,7 +10,7 @@ def app():
     
   # 何も分からん
     with api.app.app_context():
-        init_db(app)
+        init_db()
 
     yield app 
 

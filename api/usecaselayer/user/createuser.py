@@ -2,6 +2,7 @@ from injector import inject
 from http.client import BAD_REQUEST
 from flask_restful import abort
 from injector import inject
+from ulid import ULID
 
 from api.domainlayer.password.IpasswordRepository import IpasswordRepository
 from api.domainlayer.password.password import Password
@@ -33,10 +34,11 @@ class CreateUser():
             param (dict): ユーザの入力値(バリデーションはプレゼンテーション層)
         """        
         # ユーザ作成
+        id: str  = str(ULID())
         email: Email = Email(param["email"])
-        user: User = User(email)
+        
+        user: User = User(id, email)
         password: Password = Password(user.id, param["password"])
-        print(user)
         
         self.validateuser.validate(user)
         

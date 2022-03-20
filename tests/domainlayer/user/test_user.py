@@ -1,10 +1,13 @@
 from time import sleep
+
+from ulid import ULID
 from api.domainlayer.user.user import User
 from api.domainlayer.user.valueobject.email import Email
 
 def test_Userエンティティの初期化():
+    id: str = str(ULID())
     email: Email = Email("hoge@example.com")
-    user: User = User(email)
+    user: User = User(id, email)
     
     # インスタンスが生成されることを確認
     assert isinstance(user,User)
@@ -26,32 +29,38 @@ def test_Userエンティティの初期化():
 def test_UserIDの一意性():
     
     # 事前条件：Userインスタンスを2つ
-    user1 = User(Email("fuga@exmaple.com"))
-    sleep(0.1)
-    user2 = User(Email("fizz@exmaple.com"))
+    id1: str = str(ULID())
+    user1 = User(id1, Email("fuga@exmaple.com"))
+    
+    id2: str = str(ULID())
+    user2 = User(id2, Email("fizz@exmaple.com"))
     
     # IDが異なることを確認
     assert user1.id != user2.id
 
 def test_UserIDが辞書順になることを確認():
     # 事前条件： Userインスタンスを2つ作成
+    id1: str = str(ULID())
+    user1 = User(id1, Email("fuga@exmaple.com"))
     
-    user1 = User(Email("fuga@exmaple.com"))
     sleep(0.1)
-    user2 = User(Email("fizz@exmaple.com"))
+    id2: str = str(ULID())
+    user2 = User(id2, Email("fizz@exmaple.com"))
     
     # user2のidが大きいことを確認
     assert user1.id < user2.id
 
 def test_有効化状態でインスタンスを生成():
-    user = User(Email("fuga@exmaple.com"), True)
+    id: str = str(ULID())
+    user = User(id, Email("fuga@exmaple.com"), True)
     
     # is_verifyがTrueである
     assert user.is_verified == True
     
 def test_アカウントの有効化():
     # 事前条件： 初期状態ではis_verifiedがFalse
-    user = User(Email("fuga@exmaple.com"))
+    id: str = str(ULID())
+    user = User(id, Email("fuga@exmaple.com"))
     assert user.is_verified == False 
     
     # 操作： verifyメソッド実行
