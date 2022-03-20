@@ -1,6 +1,7 @@
 ## アプリケーションファクトリを定義
 from http.client import BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND
 from flask import (Flask, jsonify)
+from dotenv import load_dotenv
 from api.mail import init_mail
 from api.presentationlayer.movie.movieview import MovieView
 from api.presentationlayer.user.userview import UserView
@@ -12,6 +13,8 @@ from flask_jwt import JWT
 # from api.views.auth import authenticate, identity
 
 def create_app():
+    
+    load_dotenv()
     app = Flask(__name__ , instance_relative_config=True)
 
     # 標準設定ファイルを読み込み(標準設定とは？)

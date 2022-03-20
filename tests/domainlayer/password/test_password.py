@@ -5,10 +5,11 @@ from api.domainlayer.user.user import User
 from api.domainlayer.user.valueobject.email import Email
 from api.domainlayer.password.password import Password
 from api.presentationlayer.shared.exception.exceptionhandler import BadRequestException
+from tests.common.factory import createuser
 
 def test_Passwordオブジェクト生成():
     # 事前条件： Userオブジェクト生成
-    user: User = User(Email("hoge@example.com"))
+    user: User = createuser()
     
     # 事前条件：パスワード文字列
     passwordstr: str = "Azuma_5050"
@@ -35,7 +36,7 @@ def test_IDの値が不正な場合に例外を出す():
 def test_passwordの値変更():
     
     # 事前条件：Passwordオブジェクト生成
-    user: User = User(Email("hoge@example.com"))
+    user: User = createuser()
     password: Password = Password(user.id, "Azuma_5050")
     
     # 変更前の値

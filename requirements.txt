@@ -16,3 +16,4 @@ Werkzeug
 Flask-Mail
 StringGenerator
 Cerberus
+python-dotenv

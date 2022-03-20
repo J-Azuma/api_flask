@@ -1,3 +1,4 @@
+from ulid import ULID
 from api.domainlayer.password.password import Password
 from api.domainlayer.user.user import User
 from api.domainlayer.user.valueobject.email import Email
@@ -8,7 +9,8 @@ def createuser() -> User:
     Returns:
         User: Userクラスインスタンス
     """    
-    user: User = User(Email("hoge@example.com"), False)
+    id = str(ULID())
+    user: User = User(id, Email("hoge@example.com"))
     return user
 
 def createpassword(id: str):

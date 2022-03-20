@@ -55,7 +55,7 @@ class UserRepository(IuserRepository):
     def find_by_id(self, id: str) -> Union[User, None]:
         
         try:
-            userdto: UserDto = self.session.query(UserDto).filter(UserDto.id == id)
+            userdto: UserDto = self.session.query(UserDto).filter(UserDto.id == id).one()
         except NoResultFound:
             return None
         except SQLAlchemyError:
