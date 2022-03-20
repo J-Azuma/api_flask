@@ -3,9 +3,10 @@ from sqlalchemy import Column
 from api.database import db
 from api.domainlayer.user.user import User
 from api.domainlayer.user.valueobject.email import Email
+from api.infrastructurelayer.database import Base
 
 
-class UserDto(db.Model):
+class UserDto(Base):
     """UserエンティティをDBとやりとりする前に詰め替えるDTO
 
     Args:

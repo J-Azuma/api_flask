@@ -5,14 +5,14 @@ from werkzeug.security import generate_password_hash
 from sqlalchemy.exc import SQLAlchemyError
 
 from api.domainlayer.password.IpasswordRepository import IpasswordRepository
-from api.database import db
+from api.infrastructurelayer.database import session
 from api.domainlayer.password.password import Password
 from api.infrastructurelayer.password.passworddto import PasswordDto
 
 class PasswordRepository(IpasswordRepository):
     
     def __init__(self) -> None:
-        self.session = db.session
+        self.session = session
         
     def add(self, password: Password) -> None:
         """レコードを追加
