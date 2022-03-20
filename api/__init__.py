@@ -1,15 +1,12 @@
 ## アプリケーションファクトリを定義
 from http.client import BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND
-import imp
 from flask import (Flask, jsonify)
-from api.database import db, init_db
 from api.mail import init_mail
 from api.presentationlayer.movie.movieview import MovieView
 from api.presentationlayer.user.userview import UserView
 from api.presentationlayer.shared.exception.exceptionhandler import BadRequestException, InternalServerException, NotFoundException
 
 from api.domainlayer.shared.domainexception import BadRequestDomainException
-# from api.views.userView import UserView
 from flask_jwt import JWT
 
 # from api.views.auth import authenticate, identity
