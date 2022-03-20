@@ -12,7 +12,6 @@ from api.domainlayer.shared.domainexception import BadRequestDomainException
 # from api.views.userView import UserView
 from flask_jwt import JWT
 
-
 # from api.views.auth import authenticate, identity
 
 def create_app():
@@ -25,7 +24,7 @@ def create_app():
     app.config.from_envvar("APP_CONFIG")
 
     # 各種オブジェクトを初期化
-    init_db(app)
+    #init_db(app)
     init_mail(app)
     # jwt = JWT(app, authenticate, identity)
     
@@ -40,6 +39,8 @@ def create_app():
     
     # ExceptionHandler in Domain layer
     app.register_error_handler(BadRequestDomainException, BadRequestDomainException.handle_domain_exception)
+    
+    
     return app
 
     

@@ -36,6 +36,7 @@ class CreateUser():
         email: Email = Email(param["email"])
         user: User = User(email)
         password: Password = Password(user.id, param["password"])
+        print(user)
         
         self.validateuser.validate(user)
         

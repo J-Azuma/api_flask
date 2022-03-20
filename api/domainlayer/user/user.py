@@ -6,17 +6,18 @@ from api.domainlayer.user.valueobject.email import Email
 class User():
     """Userクラス
     """    
-    def __init__(self, email: Email, is_verified: bool = False, id: str = str(ULID())) -> None:
-        """Userインスタンスを初期化。再構成を考慮して、新規生成時はidをデフォルトで設定する
+    def __init__(self, email: Email, is_verified: bool = False) -> None:
+        """Userインスタンスを初期化。
 
         Args:
             email (Email): メールアドレス
             is_verified (bool, optional): 有効化フラグ Defaults to False.
             id (str, optional): id Defaults to str(ULID()).
         """        
+        self.__id: str = str(ULID())
         self.__email: Email = email
         self.__is_verified: bool = is_verified
-        self.__id: str = id
+        
     
     @property
     def id(self) -> str:

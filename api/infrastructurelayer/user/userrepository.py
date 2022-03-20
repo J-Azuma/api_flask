@@ -7,12 +7,12 @@ from sqlalchemy.orm.exc import NoResultFound
 from api.domainlayer.user.Iuserrepository import IuserRepository
 from api.domainlayer.user.user import User
 from api.infrastructurelayer.user.userdto import UserDto
-from api.database import db
+from api.infrastructurelayer.database import session
 
 class UserRepository(IuserRepository):
     
     def __init__(self) -> None:
-        self.session = db.session
+        self.session = session
     
     def add(self, user: User) -> None:
         """ ユーザを追加
@@ -29,7 +29,7 @@ class UserRepository(IuserRepository):
             self.session.commit()
         except SQLAlchemyError as e:
             self.session.rollback()
-            abort(INTERNAL_SERVER_ERROR)
+            raise Exception("DBエラーが発生しました")
     
     def find_by_email(self, user: User) -> Union[User, None]:
         """emailカラムでレコードを検索
