@@ -4,7 +4,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import os
 
-engine = create_engine(os.getenv("SQLALCHEMY_DATABASE_URI"), echo=True)
+engine = create_engine(str(os.getenv("SQLALCHEMY_DATABASE_URI")), echo=True)
 
 session_maker = sessionmaker(autocommit=False,
                              autoflush=False,
