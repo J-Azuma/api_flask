@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
+from api.domainlayer.password.password import Password
+
 class IpasswordRepository(metaclass=ABCMeta):
     """パスワードリポジトリのインターフェース
 
@@ -16,5 +18,10 @@ class IpasswordRepository(metaclass=ABCMeta):
         pass
     
     @abstractmethod
-    def add(self, password) -> None:
+    def add(self, password: Password) -> None:
+        """パスワード永続化処理のインターフェース
+
+        Args:
+            password (Password): パスワードインスタンス
+        """
         pass
