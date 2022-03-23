@@ -4,14 +4,15 @@ from typing import Union
 from api.infrastructurelayer.user.userrepository import UserRepository
 from api.domainlayer.user.user import User
 from tests.common.factory import createuser
+from api.infrastructurelayer.database import session
 
-
-def test_User登録(client):
+def test_User登録():
     
         user: User = createuser()
         userrepository = UserRepository()
         # 操作： user登録登録したユーザを検索
         userrepository.add(user)
+        session.commit()
         registerd_user: Union[User, None] = userrepository.find_by_id(user.id)
         
         # 想定結果

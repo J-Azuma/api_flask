@@ -22,5 +22,5 @@ def createpassword(id: str):
     Returns:
         _type_: Passwordクラスインスタンス
     """    
-    password: Password = Password(id, "hoge_25252525")
+    password: Password = Password(id, "Hoge_25252525")
     return password

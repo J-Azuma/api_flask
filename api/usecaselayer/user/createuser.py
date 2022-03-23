@@ -1,16 +1,15 @@
 from injector import inject
-from http.client import BAD_REQUEST
 from flask_restful import abort
 from injector import inject
 from ulid import ULID
-
+from sqlalchemy.exc import SQLAlchemyError
 from api.domainlayer.password.IpasswordRepository import IpasswordRepository
 from api.domainlayer.password.password import Password
 from api.domainlayer.user.Iuserrepository import IuserRepository
 from api.domainlayer.user.service.validateuser import ValidateUser
 from api.domainlayer.user.user import User
 from api.domainlayer.user.valueobject.email import Email
-
+from api.infrastructurelayer.database import session
 class CreateUser():
     """ユーザ作成ユースケース
     """    
@@ -27,6 +26,7 @@ class CreateUser():
         self.passwordrepository: IpasswordRepository = passwordrepository
         self.validateuser: ValidateUser = validateuser
     
+    
     def register(self, param: dict) -> None:
         """ユーザ作成処理
 
@@ -42,9 +42,19 @@ class CreateUser():
         
         self.validateuser.validate(user)
         
+        
+        sess = session
         # トランザクション処理にします
-        self.userrepository.add(user)
-        self.passwordrepository.add(password)
+        try:
+            self.userrepository.add(user)
+            sess.flush()
+            self.passwordrepository.add(password)
+            sess.commit()
+        except:
+            sess.rollback()
+            raise Exception("エラーが発生しました")
+        finally:
+            sess.close()
         
 
         

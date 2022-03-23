@@ -1,16 +1,21 @@
-from click import echo
+from mysqlx import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import os
 
-engine = create_engine(str(os.getenv("SQLALCHEMY_DATABASE_URI")), echo=True)
+# DB接続設定
+engine = create_engine(str(os.getenv("SQLALCHEMY_DATABASE_URI")), echo = True)
 
+# session設定
 session_maker = sessionmaker(autocommit=False,
                              autoflush=False,
                              bind=engine)
+# session設定
+db_session  = scoped_session(session_maker)
 
-session = scoped_session(session_maker)
+# セッション初期化 
+session = db_session
 
 Base = declarative_base()
 Base.query = session.query_property()
